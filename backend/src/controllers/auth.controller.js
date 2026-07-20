@@ -1,6 +1,6 @@
-import {    generateToken } from "../lib/utils.js";
+import {    generateTokens } from "../lib/utils.js";
 import User from "../models/user.model.js"
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 
 export const signup = async (req, res) => {
     // res.send("signup route");
