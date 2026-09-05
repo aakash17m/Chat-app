@@ -17,9 +17,11 @@
     "cloudinary": "^2.6.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^4.22.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
