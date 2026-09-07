@@ -1,7 +1,7 @@
 import {    generateTokens } from "../lib/utils.js";
 import User from "../models/user.model.js"
 import bcrypt from 'bcryptjs';
-import cloudinary from "../lib/cloudinary"
+import cloudinary from "../lib/cloudinary.js"
 
 export const signup = async (req, res) => {
     // res.send("signup route");
@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
         })
 
         if(newUser){
-            generateToken(newUser._id, res);
+            generateTokens(newUser._id, res);
             await newUser.save();
 
             res.status(201).json({
@@ -51,8 +51,8 @@ export const signup = async (req, res) => {
 export const login = async(req, res) => {
     const { email, password} = req.body
     try {
-        const user = await user.findOne({email})
-        
+        const user = await User.findOne({email})
+
         if(!user){
             return res.status(400).json({message:"invalid credentials"});
         }
@@ -66,10 +66,10 @@ export const login = async(req, res) => {
         generateTokens(user._id,res)
 
         res.status(200).json({
-            _id: newUser._id,
-            fullname: newUser.fullname,
-            email: newUser.email,
-            createdAt: newUser.profilepic,
+            _id: User._id,
+            fullname: User.fullname,
+            email: User.email,
+            createdAt: User.profilepic,
         });
         
     } catch (error) {
