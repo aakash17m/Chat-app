@@ -6,11 +6,13 @@ import LoginPage from './pages/LoginPage'
 import SettingsPage from './pages/SettingsPage'
 import ProfilePage from './pages/ProfilePage'
 
-import { Routes, Route } from 'react-router-dom'
-import { useAuthStore } from './store/UseAuthStore'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useAuthStore } from './store/useAuthStore'
 import { useEffect } from 'react'
 
 import { Loader } from 'lucide-react'
+
+import { Toaster } from 'react-hot-toast'
 
 const App = () => {
 
@@ -41,6 +43,8 @@ const App = () => {
         <Route path='/profile' element={authUser ? <ProfilePage/> : <Navigate to='/login' />} />
 
       </Routes>
+
+      <Toaster />
     
     </div>
   )
