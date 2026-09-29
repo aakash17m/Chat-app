@@ -7,7 +7,7 @@ import SettingsPage from './pages/SettingsPage'
 import ProfilePage from './pages/ProfilePage'
 
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from './store/useAuthStore'
+import { useAuthStore } from './store/UseAuthStore.js'
 import { useEffect } from 'react'
 
 import { Loader } from 'lucide-react'
