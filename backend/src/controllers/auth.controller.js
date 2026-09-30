@@ -11,7 +11,7 @@ export const signup = async (req, res) => {
         if (!fullname || !email || !password) {
             return res.status(400).json({ message: `Please fill in all fields` });
         }
-        if (password.length < 8) {
+        if (password.length < 6) {
             return res.status(400).json({ message: `Password must be at least 8 characters` });
         }
         const user = await User.findOne({email})
@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
             generateTokens(newUser._id, res);
             await newUser.save();
 
-            res.status(201).json({
+            res.status(200).json({
                 _id: newUser._id,
                 fullname: newUser.fullname,
                 email: newUser.email,
