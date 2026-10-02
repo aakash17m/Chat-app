@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { useState } from 'react';
 import { useAuthStore } from '../store/UseAuthStore';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
-  const [login, isLoggingIn] = useAuthStore();
+  const { login, isLoggingIn } = useAuthStore();
   const handleSubmit = async (e) =>{
     e.preventDefault();
     login(formData);
