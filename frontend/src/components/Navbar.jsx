@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../store/UseAuthStore.js';
-import { LogOut, MessageSquare, User, Settings } from 'lucide-react';
+import { LogOut, MessageSquare, User, Settings, Search } from 'lucide-react';
 
 const Navbar = () => {
 
@@ -18,7 +18,7 @@ const Navbar = () => {
               <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold">Chat App</h1>
+              <h1 className="text-2xl font-bold">Chat Chat</h1>
             </Link>
           </div>
 
