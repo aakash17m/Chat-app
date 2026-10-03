@@ -48,6 +48,7 @@ export const signup = async (req, res) => {
         res.status(500).json({message: "Internal server error"});
     }
 }
+
 export const login = async(req, res) => {
     const { email, password} = req.body
     try {
@@ -57,8 +58,8 @@ export const login = async(req, res) => {
             return res.status(400).json({message:"invalid credentials"});
         }
 
-        const isPassorrect = await bcrypt.compare(password, user.password);
-        if (!isPassorrect) {
+        const isPassorrectCorrect = await bcrypt.compare(password, user.password);
+        if (!isPassorrectCorrect) {
             return res.status(400).json({message:"invalid credentials"});
 
         }
@@ -77,7 +78,8 @@ export const login = async(req, res) => {
         res.status(500).json({message:"Internal Server Error"});
 
     }
-}
+};
+
 export const logout = (req, res) => {
     // res.send("logout route");
     try {
@@ -88,8 +90,7 @@ export const logout = (req, res) => {
         console.log("Error in logout controller", error.message);
         res.status(500).json({message:"Internal Server Error"});
     }
-
-}
+};
 
 export const updateProfile = async (req, res) => {
     
