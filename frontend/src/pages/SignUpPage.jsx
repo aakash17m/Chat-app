@@ -9,7 +9,7 @@ import { toast } from 'react-hot-toast';
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
+    fullname: '',
     email: '',
     password: '',
   });
@@ -17,7 +17,7 @@ const SignUpPage = () => {
   const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
-    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.fullname.trim()) return toast.error("Full name is required");
     if (!formData.email.trim()) return toast.error("Email is required");
     if(!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Please enter a valid email address");
     if (!formData.password) return toast.error("Password is required");
@@ -57,7 +57,7 @@ const SignUpPage = () => {
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="size-5 text-base-content/40" />
                 </div>
-                <input type="text" className={`input input-bordered w-full pl-10`} placeholder="your name" value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value})} />
+                <input type="text" className={`input input-bordered w-full pl-10`} placeholder="your name" value={formData.fullname} onChange={(e) => setFormData({ ...formData, fullname: e.target.value})} />
               </div>
             </div>
 
