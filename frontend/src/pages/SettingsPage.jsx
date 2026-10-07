@@ -1,23 +1,23 @@
-import { useThemeStore } from '../store/useThemeStore'
-import { THEMES } from '../constants'
-import { Send } from 'lucide-react'
-
-
+import { THEMES } from "../constants";
+import { useThemeStore } from "../store/useThemeStore";
+import { Send } from "lucide-react";
 
 const PREVIEW_MESSAGES = [
-  {id:1, content: "Hello, Whats up?", isSent: false},
-  {id:2, content: "I'm good, thanks! How about you?", isSent: true},
-]
-const SettingPage = () => {
-  const {theme, setTheme} = useThemeStore();
+  { id: 1, content: "Hey! How's it going?", isSent: false },
+  { id: 2, content: "I'm doing great! Just working on some new features.", isSent: true },
+];
+
+const SettingsPage = () => {
+  const { theme, setTheme } = useThemeStore();
 
   return (
     <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
-          <p className="text-sm text-base-content/70">Choose your preferred theme</p>
+          <p className="text-sm text-base-content/70">Choose your preferred chat theme</p>
         </div>
+
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
           {THEMES.map((t) => (
             <button
@@ -54,10 +54,10 @@ const SettingPage = () => {
                 <div className="px-4 py-3 border-b border-base-300 bg-base-100">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium">
-                      U
+                      J
                     </div>
                     <div>
-                      <h3 className="font-medium text-sm">User</h3>
+                      <h3 className="font-medium text-sm">John Doe</h3>
                       <p className="text-xs text-base-content/70">Online</p>
                     </div>
                   </div>
@@ -83,7 +83,7 @@ const SettingPage = () => {
                             ${message.isSent ? "text-primary-content/70" : "text-base-content/70"}
                           `}
                         >
-                          12:01 PM
+                          12:00 PM
                         </p>
                       </div>
                     </div>
@@ -109,11 +109,8 @@ const SettingPage = () => {
             </div>
           </div>
         </div>
-
-        
       </div>
     </div>
-  )
-}
-
-export default SettingPage;
+  );
+};
+export default SettingsPage;
