@@ -1,3 +1,6 @@
 {
-    "chat.disableAIFeatures": false
+    "chat.disableAIFeatures": false,
+    "C_Cpp.autocompleteAddParentheses": true,
+    "cody.autocomplete.disableInsideComments": false,
+    "cody.autocomplete.formatOnAccept": true
 }
