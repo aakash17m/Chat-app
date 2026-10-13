@@ -4,9 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aakash17m/Chat-app.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/aakash17m/Chat-app/issues"
+  },
+  "homepage": "https://github.com/aakash17m/Chat-app#readme"
 }
