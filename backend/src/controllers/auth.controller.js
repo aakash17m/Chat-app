@@ -3,53 +3,122 @@ import User from "../models/user.model.js"
 import bcrypt from 'bcryptjs';
 import cloudinary from "../lib/cloudinary.js"
 
-export const signup = async (req, res) => {
-    // res.send("signup route");
-    // console.log("req.body:", req.body);
-    const { email, fullname, password } = req.body;
+// export const signup = async (req, res) => {
+//     // res.send("signup route");
+//     // console.log("req.body:", req.body);
+//     const { email, fullname, password } = req.body;
 
-    try {
+//     try {
+//         // const { email, fullname, password } = req.body;
 
-        if (!fullname || !email || !password) {
-            return res.status(400).json({ message: `Please fill in all fields` });
-        }
-        if (password.length < 8) {
-            return res.status(400).json({ message: `Password must be at least 8 characters` });
-        }
-        const user = await User.findOne({email})
+//         if (!fullname?.trim() || !email?.trim() || !password) {
+//             return res.status(400).json({ message: `Please fill in all fields` });
+//         }
+//         if (typeof password !== "string" || password.length < 8) {
+//             return res.status(400).json({ message: `Password must be at least 8 characters` });
+//         }
+//         const normalizedEmail = email.trim().toLowerCase();
+//         const user = await User.findOne({email: normalizedEmail});
 
-        if(user){
-            return res.status(400).json({message: `Email already exists`});
-        }
+//         if(user){
+//             return res.status(400).json({message: `Email already exists`});
+//         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(password, salt);
+//         const salt = await bcrypt.genSalt(10);
+//         const hashedPass = await bcrypt.hash(password, salt);
 
-        const newUser = new User({
-            fullname,
-            email,
-            password: hashedPass
-        })
+//         const newUser = new User.create({
+//             // fullname,
+//             // email,
+//             // password: hashedPass
+//             fullname: fullname.trim(),
+//             email: normalizedEmail,
+//             password: hashedPass,
+//         })
 
-        if(newUser){
-            generateTokens(newUser._id, res);
-            await newUser.save();
+//         if(newUser){
+//             generateTokens(newUser._id, res);
+//             await newUser.save();
 
-            res.status(201).json({
-                _id: newUser._id,
-                fullname: newUser.fullname,
-                email: newUser.email,
-                createdAt: newUser.profilepic
-            });
-        } else{
-            res.status(400).json({message: `Invalid user data`});
-        }
+//             res.status(201).json({
+//                 _id: newUser._id,
+//                 fullname: newUser.fullname,
+//                 email: newUser.email,
+//                 createdAt: newUser.profilepic
+//             });
+//         } else{
+//             res.status(400).json({message: `Invalid user data`});
+//         }
         
+//     } catch (error) {
+//         console.log("Error in signup controller: ", error.message);
+//         res.status(500).json({message: "Internal server error"});
+//     }
+// }
+
+export const signup = async (req, res) => {
+    try {
+        const { email, fullname, password } = req.body;
+
+        // Validate required fields
+        if (!fullname?.trim() || !email?.trim() || !password) {
+            return res.status(400).json({
+                message: "Please fill in all fields",
+            });
+        }
+
+        if (typeof password !== "string" || password.length < 8) {
+            return res.status(400).json({
+                message: "Password must be at least 8 characters",
+            });
+        }
+
+        // Check if email already exists
+        const normalizedEmail = email.trim().toLowerCase();
+        const user = await User.findOne({ email: normalizedEmail });
+
+        if (user) {
+            return res.status(400).json({
+                message: "Email already exists",
+            });
+        }
+
+        // Hash password
+        const hashedPass = await bcrypt.hash(password, 10);
+
+        // Create and save user
+        const newUser = await User.create({
+            fullname: fullname.trim(),
+            email: normalizedEmail,
+            password: hashedPass,
+        });
+
+        // Generate JWT token
+        generateTokens(newUser._id, res);
+
+        return res.status(201).json({
+            _id: newUser._id,
+            fullname: newUser.fullname,
+            email: newUser.email,
+            profilepic: newUser.profilepic,
+            createdAt: newUser.createdAt,
+        });
+
     } catch (error) {
-        console.log("Error in signup controller: ", error.message);
-        res.status(500).json({message: "Internal server error"});
+        console.error("Error in signup controller:", error);
+
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "Email already exists",
+            });
+        }
+
+        return res.status(500).json({
+            message: "Internal server error",
+        });
     }
-}
+};
+
 
 export const login = async(req, res) => {
     const { email, password} = req.body

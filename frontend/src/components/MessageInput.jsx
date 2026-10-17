@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useChatStore } from '../store/useChatStore';
-import { X, Send } from 'lucide-react';
+import { Image, X, Send } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 
