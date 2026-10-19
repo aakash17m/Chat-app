@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useChatStore } from '../store/useChatStore';
-import { Image, X, Send } from 'lucide-react';
+import { X, Send, Image } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 
@@ -12,7 +12,9 @@ const MessageInput = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (!file.type.startWith('image/')) {
+    // if(!file) return;
+
+    if (!file.type.startsWith('image/')) {
       toast.error('Please select a valid image file');
       return;
     }
@@ -22,12 +24,12 @@ const MessageInput = () => {
       setImagePreview(reader.result);
     };
     reader.readAsDataURL(file);
-  }
+  };
 
   const removeImage = () => {
     setImagePreview(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
-  }
+  };
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
