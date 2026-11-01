@@ -11,27 +11,27 @@ import { formatMessageTime } from "../lib/utils";
 const ChatContainer = () => {
   const { messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeFromMessages } = useChatStore();
   const { authUser } = useAuthStore();
-  const messagesEndRef = useRef(null);
+  const messageEndRef = useRef(null);
 
   useEffect(() => {
-    if (!selectedUser?._id) return;
+    // if (!selectedUser?._id) return;
 
     getMessages(selectedUser._id);
     subscribeToMessages();
 
     return () => unsubscribeFromMessages();
 
-  }, [selectedUser?._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
+  }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
   useEffect(() => {
-    if (messagesEndRef.current && messages){
-      messagesEndRef.current?.scrollIntoView({ 
+    if (messageEndRef.current && messages){
+      messageEndRef.current.scrollIntoView({ 
         behavior: "smooth",
         block: "end",
       });
     }
   }
-    ,[messages, selectedUser?._id]);
+    ,[messages]);
 
   if (isMessagesLoading) {
     return (
@@ -51,7 +51,7 @@ const ChatContainer = () => {
         {messages.map((message) => (
           <div key={message._id}
             className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
-            ref={messagesEndRef}
+            ref={messageEndRef}
             >
             <div className="chat-image avatar">
               <div className="size-10 rounded-full border">
