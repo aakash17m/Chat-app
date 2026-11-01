@@ -1,6 +1,6 @@
 // import React from 'react';
 import { useState } from 'react';
-import { useAuthStore } from '../store/useAuthStore';
+import { useAuthStore } from '../store/UseAuthStore';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Loader2, MessageSquare } from 'lucide-react';
 import AuthImagePattern from '../components/AuthImagePattern';
