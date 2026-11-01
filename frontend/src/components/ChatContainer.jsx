@@ -24,12 +24,14 @@ const ChatContainer = () => {
   }, [selectedUser?._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
   useEffect(() => {
-    // if (messageEndRef.current && messages){
+    if (messagesEndRef.current && messages){
       messagesEndRef.current?.scrollIntoView({ 
         behavior: "smooth",
         block: "end",
       });
-    } ,[messages, selectedUser?._id]);
+    }
+  }
+    ,[messages, selectedUser?._id]);
 
   if (isMessagesLoading) {
     return (

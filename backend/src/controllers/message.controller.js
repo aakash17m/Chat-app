@@ -42,17 +42,16 @@ export const sendMessage = async (req, res) => {
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
 
-        if (!receiverId) {
-            return res.status(400).json({
-                message: "Receiver ID is required",
-            });
-        }
-        if ((!text || !text.trim()) && !image) {
-            return res.status(400).json({
-                message: "Message cannot be empty",
-            });
-        }
-        
+        // if (!receiverId) {
+        //     return res.status(400).json({
+        //         message: "Receiver ID is required",
+        //     });
+        // }
+        // if ((!text || !text.trim()) && !image) {
+        //     return res.status(400).json({
+        //         message: "Message cannot be empty",
+        //     });
+        // }
         let imageUrl;
         if (image) {
             // Upload base64 image to Cloudinary
