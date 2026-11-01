@@ -7,7 +7,7 @@ import SettingsPage from './pages/SettingsPage'
 import ProfilePage from './pages/ProfilePage'
 
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from './store/useAuthStore.js'
+import { useAuthStore } from './store/UseAuthStore'
 import { useThemeStore } from './store/useThemeStore'
 import { useEffect } from 'react'
 
